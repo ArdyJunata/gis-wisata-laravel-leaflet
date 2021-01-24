@@ -86,7 +86,7 @@ class WisataController extends Controller
 
         // dd($data);
 
-        return redirect('/wisata');
+        return redirect('/wisata/list')->with('status', 'Data wisata berhasil ditambahkan !');
 
     }
 
@@ -124,14 +124,14 @@ class WisataController extends Controller
         $data->longitude = $request->longitude;
         $data->save();
 
-        return redirect('/wisata/detail/' . $id);
+        return redirect('/wisata/detail/' . $id)->with('status', 'Data Berhasil di Update !');
     }
 
     public function delete($id)
     {
         $data = Wisata::find($id);
         $data->delete();
-        return redirect('/wisata/list');
+        return redirect('/wisata/list')->with('status', 'Data wisata berhasil dihapus !');
     }
 
     public function geoJson ($feature)

@@ -23,7 +23,16 @@
             <a href="/wisata/create" class="btn btn-primary">Tambah Wisata</a>
         </div>
     </div>   
-    <div class="row mt-3">
+    @if (session('status'))
+        <div class="row mt-2">
+            <div class="col-md-10 offset-md-1">
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            </div>
+        </div> 
+    @endif
+    <div class="row mt-2">
         <div class="col-md-10 offset-md-1">
             <div class="card mb-5">
                 <div class="card-header">

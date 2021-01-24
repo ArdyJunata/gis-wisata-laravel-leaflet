@@ -1,51 +1,17 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('wisata.main');
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+@section('title', 'Tambah Wisata');
 
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-   crossorigin=""/>
-   <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
+@section('styles')
     <style>
         body {
             margin-top: 80px;
         }
         #map { width: 610px; height: 300px; }
     </style>
-    <title>Maps</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-        <div class="container-fluid d-flex justify-content-around">
-            <a href="/wisata" class="navbar-brand">Admin </a>
-            <div id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a href=# class="nav-link active">Maps</a>
-                    </li>
-                    <li class="nav-item mx-3">
-                        <a href=# class="nav-link active">List</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href=# class="nav-link active dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+@endsection
 
+@section('content')
     {{-- content --}}
 
     <div class="container">
@@ -60,20 +26,34 @@
                         @csrf
                             <div class="mb-3">
                                 <label class="form-label">Nama Wisata</label>
-                                <input type="text" class="form-control" name="nama_wisata" placeholder="nama wisata">
+                                <input type="text" class="form-control @error('nama_wisata') is-invalid @enderror" name="nama_wisata" placeholder="nama wisata" value="{{ old('nama_wisata') }}">
+                                @error('nama_wisata')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Alamat</label>
-                                <textarea class="form-control" placeholder="alamat wisata" name="alamat" style="height: 100px"></textarea>
+                                <textarea class="form-control @error('alamat') is-invalid @enderror" placeholder="alamat wisata" name="alamat" style="height: 100px">{{ old('alamat') }}</textarea>
+                                @error('alamat')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Kabupaten</label>
-                                <input type="text" class="form-control" name="kabupaten" placeholder="kabupaten wisata">
+                                <input type="text" class="form-control @error('kabupaten') is-invalid @enderror" name="kabupaten" placeholder="kabupaten wisata" value="{{ old('kabupaten') }}">
+                                @error('kabupaten')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Jenis Wisata</label>
                                 <select class="form-select" name="jenis_wisata" aria-label="Default select example">
-                                    <option selected>pilih jenis wisata</option>
                                     <option value="Alam">Alam</option>
                                     <option value="Agama">Agama</option>
                                     <option value="Budaya">Budaya</option>
@@ -81,16 +61,31 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Url gambar</label>
-                                <input type="text" class="form-control" name="foto" placeholder="Foto">
+                                <input type="text" class="form-control @error('foto') is-invalid @enderror" name="foto" placeholder="Foto" value="{{ old('foto') }}">
+                                @error('foto')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="form-label">Latitude</label>
-                                    <input type="text" id="latitude" name="langitude" value="{{ request('lat') }}" class="form-control" name="" placeholder="titik latitude">
+                                    <input type="text" id="latitude" name="langitude" value="@if(request()){{ request('lat')}}@endif" class="form-control @error('langitude') is-invalid @enderror" placeholder="titik latitude">
+                                    @error('langitude')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Longitude</label>
-                                    <input type="text" id="longitude" name="longitude" value="{{ request('long') }}" class="form-control" name="" placeholder="titik longitude">
+                                    <input type="text" id="longitude" name="longitude" value="@if(request()){{ request('long')}}@endif" class="form-control @error('longitude') is-invalid @enderror" placeholder="titik longitude">
+                                    @error('longitude')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
@@ -105,19 +100,9 @@
             </div>
         </div>        
     </div>
+@endsection
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-    -->
-  </body>
-</html>
+@push('scripts')
 
 <script>
     let accessToken = 'pk.eyJ1Ijoicml3YWxzeWFtIiwiYSI6ImNrajB5c21obTF1ZmQycnAyOTY3N2VycXUifQ.DAfn6MTxzf_BU3lqD0fIgQ'
@@ -158,3 +143,5 @@
     $('#longitude').on('input', updateMarkerByInputs);
 
 </script>
+
+@endpush

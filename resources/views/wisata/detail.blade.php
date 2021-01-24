@@ -22,8 +22,17 @@
         <div class="col-md-10 offset-md-1 d-flex justify-content-between">
             <h2>{{ $data['nama_wisata'] }}</h2>
         </div>
-    </div>   
-    <div class="row mt-3">
+    </div> 
+    @if (session('status'))
+        <div class="row mt-2">
+            <div class="col-md-10 offset-md-1">
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            </div>
+        </div> 
+    @endif  
+    <div class="row mt-2">
         <div class="col-md-5 offset-md-1">
             <div class="card mb-5">
                 <div class="card-header">
