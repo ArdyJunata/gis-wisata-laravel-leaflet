@@ -7,6 +7,23 @@
             margin-top: 80px;
         }
         #map { height: 600px; }
+
+        .info {
+            padding: 10px 30px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+        .legend {
+            line-height: 18px;
+            color: #555;
+        }
     </style>
 
 @endsection
@@ -185,6 +202,65 @@
         .openPopup();
         return false;
     };
+    
+    var info = L.control({position: 'bottomleft'});
+
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        this.update();
+        return this._div;
+    };
+
+    // method that we will use to update the control based on feature properties passed
+    info.update = function (props) {
+        this._div.innerHTML = '<h4>Peta Wisata Riau</h4>';
+    };
+
+    info.addTo(mymap);
+
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend');
+
+        div.innerHTML = 
+            '<table cellpadding="5">' +
+                '<tr>' +
+                    '<td colspan="2">' +
+                        'Kategori Wisata' +
+                    '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td>' +
+                        '<img src="{{ asset('assets/icon/unity.png') }}" width="35">' + 
+                    '</td>' +
+                    '<td>' +
+                        'Budaya' + 
+                    '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td>' +
+                        '<img src="{{ asset('assets/icon/islam.png') }}" width="35">' + 
+                    '</td>' +
+                    '<td>' +
+                        'Agama' + 
+                    '</td>' +
+                '</tr>' +
+                '<tr>' +
+                    '<td>' +
+                        '<img src="{{ asset('assets/icon/leaf.png') }}" width="35">' + 
+                    '</td>' +
+                    '<td>' +
+                        'Alam' + 
+                    '</td>' +
+                '</tr>' +
+            '</table>'
+
+        return div;
+    };
+
+    legend.addTo(mymap);
 
 </script>
 
