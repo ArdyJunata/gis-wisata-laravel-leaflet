@@ -110,11 +110,14 @@
         }
     });
 
-    let alamLayer = L.geoJson(@json($alam), {
+    let alamLayer = L.geoJson(@json($all), {
+        filter: function (feature, layer) {
+            return feature.properties['jenis_wisata'] == "Alam"
+        },
         onEachFeature: function (feature, layer) {
             const data = feature.properties;
 
-            layer.bindPopup(`<b>${data['nama_wisata']}</b><br>(${data['jenis_wisata']})<br><img src="${data['foto']}" width="250">`);
+            layer.bindPopup(`<b>${data['nama_wisata']}</b><br>${data['alamat']}<br>(${data['jenis_wisata']})<br><img src="${data['foto']}" width="250">`);
 
             const icon = L.icon({
                 iconUrl:  '{{ asset('assets/icon/leaf.png') }}',
@@ -127,11 +130,14 @@
         }
     })
 
-    let agamaLayer = L.geoJson(@json($agama), {
+    let agamaLayer = L.geoJson(@json($all), {
+        filter: function(feature, layer) {
+            return feature.properties['jenis_wisata'] == "Agama"
+        },
         onEachFeature: function (feature, layer) {
             const data = feature.properties;
 
-            layer.bindPopup(`<b>${data['nama_wisata']}</b><br>(${data['jenis_wisata']})<br><img src="${data['foto']}" width="250">`);
+            layer.bindPopup(`<b>${data['nama_wisata']}</b><br>${data['alamat']} <br>(${data['jenis_wisata']})<br><img src="${data['foto']}" width="250">`);
 
             const icon = L.icon({
                 iconUrl:  '{{ asset('assets/icon/islam.png') }}',
@@ -144,11 +150,14 @@
         }
     })
 
-    let budayaLayer = L.geoJson(@json($budaya), {
+    let budayaLayer = L.geoJson(@json($all), {
+        filter: function(feature, layer) {
+            return feature.properties['jenis_wisata'] == "Budaya"
+        },
         onEachFeature: function (feature, layer) {
             const data = feature.properties;
 
-            layer.bindPopup(`<b>${data['nama_wisata']}</b><br>(${data['jenis_wisata']})<br><img src="${data['foto']}" width="250">`);
+            layer.bindPopup(`<b>${data['nama_wisata']}</b><br>${data['alamat']} <br>(${data['jenis_wisata']})<br><img src="${data['foto']}" width="250">`);
 
             const icon = L.icon({
                 iconUrl:  '{{ asset('assets/icon/unity.png') }}',
@@ -159,9 +168,7 @@
             layer.setIcon(icon);
 
         }
-    })
-
-    console.log(geoLayer);
+    });
 
     var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.');
 
@@ -181,7 +188,7 @@
         "Budaya": budayaLayer
     };
 
-    L.control.layers(overlayMaps).addTo(mymap);
+    L.control.layers(null, overlayMaps).addTo(mymap);
     
     let mark = L.marker([0, 0]).addTo(mymap);
 

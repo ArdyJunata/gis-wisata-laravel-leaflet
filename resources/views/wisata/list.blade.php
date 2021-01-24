@@ -34,7 +34,7 @@
     @endif
     <div class="row mt-2">
         <div class="col-md-10 offset-md-1">
-            <div class="card mb-5">
+            <div class="card mb-3">
                 <div class="card-header">
                         Maps
                 </div>
@@ -61,6 +61,7 @@
                     </table>
                 </div>
             </div>
+                    {{ $data->links() }}
         </div>
     </div>        
 </div>

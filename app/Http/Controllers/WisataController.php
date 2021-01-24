@@ -10,39 +10,18 @@ class WisataController extends Controller
 {
     public function index() {
         $all = Wisata::all()->toArray();
-        $alam = Wisata::select()->where('jenis_wisata', 'Alam')->get()->toArray();
-        $agama = Wisata::select()->where('jenis_wisata', 'Agama')->get()->toArray();
-        $budaya = Wisata::select()->where('jenis_wisata', 'Budaya')->get()->toArray();
 
         // dd($alam);
 
         $featureAll = [];
-        $featureAlam = [];
-        $featureAgama = [];
-        $featureBudaya = [];
 
         foreach($all as $item) {
             array_push($featureAll, $this->geometry($item));
         }
 
-        foreach($alam as $item) {
-            array_push($featureAlam, $this->geometry($item));
-        }
-
-        foreach($agama as $item) {
-            array_push($featureAgama, $this->geometry($item));
-        }
-
-        foreach($budaya as $item) {
-            array_push($featureBudaya, $this->geometry($item));
-        }
-
         $semua = $this->geoJson($featureAll);
-        $geoAlam = $this->geoJson($featureAlam);
-        $geoAgama = $this->geoJson($featureAgama);
-        $geoBudaya = $this->geoJson($featureBudaya);
         
-        return view('wisata.index', ['all' => $semua, 'alam' => $geoAlam, 'budaya' => $geoBudaya, 'agama' => $geoAgama]);
+        return view('wisata.index', ['all' => $semua]);
     }
 
     public function detail($id)
@@ -97,7 +76,7 @@ class WisataController extends Controller
 
     public function list()
     {
-        $data = Wisata::all();
+        $data = Wisata::paginate(12);
 
         return view('wisata.list', ['data' => $data]);
     }

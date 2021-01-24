@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,9 @@ Route::prefix('wisata')->group(function () {
     Route::get('/detail/{id}', [$controller, 'detail']);
     Route::put('/detail/{id}', [$controller, 'update']);
     Route::get('/delete/{id}', [$controller, 'delete']);
+});
+
+Route::prefix('user')->group(function () {
+    $controller = UserController::class;
+    Route::get('/', [$controller, 'index']);
 });
