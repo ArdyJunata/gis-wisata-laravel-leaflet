@@ -20,8 +20,18 @@ class WisataController extends Controller
         }
 
         $semua = $this->geoJson($featureAll);
+
+        $data = [
+            'all' => $semua,
+            'count' => [
+                'total' => Wisata::all()->count(),
+                'alam' => Wisata::where('jenis_wisata', 'Alam')->count(),
+                'budaya' => Wisata::where('jenis_wisata', 'Budaya')->count(),
+                'agama' => Wisata::where('jenis_wisata', 'Agama')->count(),
+            ],
+        ];
         
-        return view('wisata.index', ['all' => $semua]);
+        return view('wisata.index', $data);
     }
 
     public function detail($id)

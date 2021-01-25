@@ -32,6 +32,26 @@
 
 @section('content')
 <div class="container">
+    <div class="row mb-4">
+        <div class="col-md-10 offset-md-1 d-flex justify-content-center">
+            <button type="button" class="btn btn-success">
+            Total <span class="badge bg-light text-dark">{{$count['total']}}</span>
+            <span class="visually-hidden">unread messages</span>
+            </button>
+            <button type="button" class="btn btn-success mx-3">
+            Alam <span class="badge bg-light text-dark">{{$count['alam']}}</span>
+            <span class="visually-hidden">unread messages</span>
+            </button>
+            <button type="button" class="btn btn-success">
+            Agama <span class="badge bg-light text-dark">{{$count['agama']}}</span>
+            <span class="visually-hidden">unread messages</span>
+            </button>
+            <button type="button" class="btn btn-success mx-3">
+            Budaya <span class="badge bg-light text-dark">{{$count['budaya']}}</span>
+            <span class="visually-hidden">unread messages</span>
+            </button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="card mb-5">
