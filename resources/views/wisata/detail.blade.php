@@ -43,7 +43,12 @@
                     <table class="table">
                         <tr>
                             <td class="text-center" colspan="2">
-                                <img src="{{ $data['foto'] }}">
+                            {{-- @if(str_contains($data['foto'], 'http' ) > 0 )
+                                <img src="{{ $data['foto'] }}" width="200">
+                            @else
+                                <img src="{{ asset('assets/img/lokasi/' . $data['foto'] ) }}" width="200">
+                            @endif --}}
+                                <img src="{{ $data['foto'] }}" width="200">
                             </td>
                         </tr>
                         <tr>

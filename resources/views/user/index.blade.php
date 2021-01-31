@@ -376,7 +376,7 @@
         onEachFeature: function (feature, layer) {
             const data = feature.properties;
 
-            layer.bindPopup(`<b>${data['nama_wisata']}</b><br>(${data['jenis_wisata']})<br><img src="${data['foto']}" width="250">`);
+            layer.bindPopup(`<b>${data['nama_wisata']}</b><br>${data['alamat']}<br>(${data['jenis_wisata']})<br><img src="${data['foto']}" width="250">`);
 
             //icon
             if (data['jenis_wisata'] === 'Alam') {

@@ -49,6 +49,7 @@ class UserController extends Controller
             'properties' => [
                 'id' => $item['id'],
                 'nama_wisata' => $item['nama_wisata'],
+                'alamat' => $item['alamat'],
                 'jenis_wisata' => $item['jenis_wisata'],
                 'kabupaten' => $item['kabupaten'],
                 'foto' => $item['foto']

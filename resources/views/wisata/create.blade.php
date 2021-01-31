@@ -22,7 +22,7 @@
                             Tambah Wisata
                     </div>
                     <div class="card-body">
-                    <form action="/wisata/create" method="post" accept-charset="UTF-8">
+                    <form action="/wisata/create" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
                             <div class="mb-3">
                                 <label class="form-label">Nama Wisata</label>
@@ -61,12 +61,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Url gambar</label>
-                                <input type="text" class="form-control @error('foto') is-invalid @enderror" name="foto" placeholder="Foto" value="{{ old('foto') }}">
-                                @error('foto')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
+                                <input type="text" class="form-control" name="foto" placeholder="Foto" value="{{ old('foto') }}">
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

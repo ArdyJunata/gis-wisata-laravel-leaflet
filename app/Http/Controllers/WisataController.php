@@ -66,10 +66,32 @@ class WisataController extends Controller
             'alamat' => 'required',
             'kabupaten' => 'required',
             'jenis_wisata' => 'required',
-            'foto' => 'required',
             'langitude' => 'required',
-            'longitude' => 'required'
+            'longitude' => 'required',
+            'foto' => 'required'
         ]);
+
+        $file = $request->file('foto1');
+        $gambar = '';
+        
+        // if(isset($file)) {
+        //     $gambar = uniqid('image-') . '.' . $file->extension();
+        //     $file->storeAs('lokasi/', $gambar, 'images');
+
+        //     // dd($file);
+        // } else {
+        //     $gambar = $request->post('foto');
+        // }
+
+        // $data = Wisata::create([
+        //     'nama_wisata' => $request->post('nama_wisata'),
+        //     'alamat' => $request->post('alamat'),
+        //     'kabupaten' => $request->post('kabupaten'),
+        //     'langitude' => $request->post('langitude'),
+        //     'longitude' => $request->post('longitude'),
+        //     'jenis_wisata' => $request->post('jenis_wisata'),
+        //     'foto' => $gambar
+        // ]);
 
         $data = Wisata::create($validate);
 
